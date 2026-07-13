@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import argparse
+import csv
 import json
+import sys
 import xml.etree.ElementTree as ET
 
 NS = {"e": "http://schemas.microsoft.com/win/2004/08/events/event"}
@@ -15,6 +17,8 @@ FIELDS = [
     "ParentCommandLine",
     "Hashes",
 ]
+
+CSV_FIELDS = ["EventID", "Computer"] + FIELDS
 
 
 def parse_event(event_elem):
@@ -66,6 +70,43 @@ def format_output(events):
     return events[0] if len(events) == 1 else events
 
 
+def print_json(events):
+    print(json.dumps(format_output(events), indent=2))
+
+
+def print_jsonl(events):
+    for event in events:
+        print(json.dumps(event))
+
+
+def print_csv(events):
+    writer = csv.DictWriter(sys.stdout, fieldnames=CSV_FIELDS, lineterminator="\n")
+    writer.writeheader()
+    writer.writerows(events)
+
+
+PRINTERS = {
+    "json": print_json,
+    "jsonl": print_jsonl,
+    "csv": print_csv,
+}
+
+
+# This stats feature is for quick triage to understand what's in a file before deep analysis
+def compute_stats(events):
+    integrity_counts = {}
+    for event in events:
+        level = event.get("IntegrityLevel")
+        integrity_counts[level] = integrity_counts.get(level, 0) + 1
+
+    return {
+        "total_events": len(events),
+        "unique_images": len({e["Image"] for e in events if e.get("Image") is not None}),
+        "unique_users": len({e["User"] for e in events if e.get("User") is not None}),
+        "events_by_integrity_level": integrity_counts,
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Extract key fields from Sysmon Event ID 1 (Process Creation) XML"
@@ -81,6 +122,17 @@ def main():
         choices=["High", "Medium", "Low", "System"],
         help="Keep events where IntegrityLevel matches. Repeatable to match any of several levels.",
     )
+    parser.add_argument(
+        "--format",
+        choices=["json", "jsonl", "csv"],
+        default="json",
+        help="Output format: json (array/object, default), jsonl (one JSON object per line), or csv",
+    )
+    parser.add_argument(
+        "--stats",
+        action="store_true",
+        help="Print summary statistics (total events, unique images/users, counts by IntegrityLevel) instead of event records",
+    )
     args = parser.parse_args()
 
     events = parse_file(args.path)
@@ -94,7 +146,12 @@ def main():
             integrity_levels=args.integrity,
         )
     ]
-    print(json.dumps(format_output(filtered), indent=2))
+
+    if args.stats:
+        print(json.dumps(compute_stats(filtered), indent=2))
+        return
+
+    PRINTERS[args.format](filtered)
 
 
 if __name__ == "__main__":
