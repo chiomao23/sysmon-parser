@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A single-file Python tool (`parser.py`) that extracts key fields from Sysmon Event ID 1 (Process Creation) XML events and prints them as JSON. No external dependencies — uses only the standard library (`xml.etree.ElementTree`, `json`, `sys`).
+A single-file Python tool (`parser.py`) that extracts key fields from Sysmon Event ID 1 (Process Creation) XML events and prints them as JSON. No external dependencies — uses only the standard library (`xml.etree.ElementTree` for parsing, `argparse` for the CLI and filter flags, `json` for output).
 
 ## Commands
 
