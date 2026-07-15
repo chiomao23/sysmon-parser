@@ -10,7 +10,7 @@ Outputs data in JSON, JSONL, or CSV
 Includes a statistics mode for quick log summaries
 Uses only Python's standard library
 
-Limitations
+Limitations:
 
 Not optimized for very large XML files
 No automated test suite
